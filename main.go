@@ -1,15 +1,17 @@
 package main
 
 import (
+	"DataCertPlatform/db_mysql"
 	_ "DataCertPlatform/routers"
-	"HelloBeego/db_myseq"
 	"github.com/astaxie/beego"
 )
 
 func main() {
 
-	db_myseq.Connect()
+	db_mysql.Connect()
 
+
+	//静态资源文件设置
 	beego.SetStaticPath("/js","./static/js")
 	beego.SetStaticPath("/css","./static/css")
 	beego.SetStaticPath("/img","./static/img")
