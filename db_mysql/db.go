@@ -31,7 +31,7 @@ func Connect(){
 	}
 	Db = db
 	fmt.Println(db)
-	
+
 
 }
 

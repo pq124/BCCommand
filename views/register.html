@@ -2,11 +2,6 @@
 <!-- saved from url=(0039)https://www.baoquan.com/sign-up?lang=zh -->
 <html lang="zh_cn">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-    <meta name="keywords" content="区块链存证、知识产权保护、网络维权、取证">
-    <meta name="description"
-          content="保全网基于区块链技术，提供数据权益保护一站式解决方案。我们专注于服务知识产权、电商维权、金融存证等领域，提供在线签名、数据存证、在线取证、在线出具司法鉴定意见书的完整流程，为上百万用户提供数据存证保全业务。是全国首例区块链存证案例的独家技术提供方。">
     <title>电子数据认证平台</title>
     <script charset="utf-8" src="./js/b.js"/>
     <script src="./js/hm.js"/>
@@ -71,7 +66,7 @@
                                             class="to-sign-in">直接登录</span></a></p></div>
                     </div>
                 </header>
-                <form class="registry-form" method="post" action="/user_register"><h1>欢迎注册电子数据认证平台</h1>
+                <form class="registry-form" method="Post" action="/register"><h1>欢迎注册电子数据认证平台</h1>
                     <section>
                         <div class="row-input input-component" style="position: relative;"><input type="text"
                                                                                                   name="telephone"
@@ -83,35 +78,8 @@
                                         class="iconfont font-error" style="line-height: 44px;"></i><label
                                         class="error-text" style="line-height: 44px;"></label></p></div>
                         <span class="name">手机号码</span></section>
-                    <section>
-                        <div class="verify"><span class="name">图形验证码</span><img
-                                    src="data:image/png;base64,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"
-                                    style="width: 88px; height: 30px; margin-left: 136px;"></div>
-                        <div class="row-input input-component" style="position: relative;"><input type="text"
-                                                                                                  name="checkCode"
-                                                                                                  placeholder="请输入图形验证码"
-                                                                                                  maxlength="4"
-                                                                                                  draggable="false"
-                                                                                                  autocomplete="off"
-                                                                                                  style="height: 44px; width: 340px;">
-                            <!-- react-text: 232 --><!-- /react-text --><p class="error-content"><i
-                                        class="iconfont font-error" style="line-height: 44px;"></i><label
-                                        class="error-text" style="line-height: 44px;"></label></p></div>
-                    </section>
-                    <section>
-                        <div class="verify"><span class="name">短信验证码</span>
-                            <button type="button" class="code" disabled="">发送验证码</button>
-                        </div>
-                        <div class="row-input input-component" style="position: relative;"><input type="text"
-                                                                                                  name="verifyCode"
-                                                                                                  placeholder="请输入短信验证码"
-                                                                                                  draggable="false"
-                                                                                                  autocomplete="off"
-                                                                                                  style="height: 44px; width: 340px;">
-                            <!-- react-text: 242 --><!-- /react-text --><p class="error-content"><i
-                                        class="iconfont font-error" style="line-height: 44px;"></i><label
-                                        class="error-text" style="line-height: 44px;"></label></p></div>
-                    </section>
+
+
                     <section>
                         <div class="verify"><span class="name">设置密码</span>
                             <div class="code"
