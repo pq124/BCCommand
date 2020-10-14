@@ -10,7 +10,6 @@ func main() {
 
 	db_mysql.Connect()
 
-
 	//静态资源文件设置
 	beego.SetStaticPath("/js","./static/js")
 	beego.SetStaticPath("/css","./static/css")

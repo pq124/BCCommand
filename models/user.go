@@ -4,14 +4,14 @@ import (
 	"DataCertPlatform/db_mysql"
 	"crypto/md5"
 	"encoding/hex"
+	"fmt"
 )
 
-type User struct{
-	Id int `form:"id"`
+type User struct {
+	Id        int    `form:"id"`
 	Telephone string `form:"telephone"`
-	Password string `form:"password"`
+	Password  string `form:"password"`
 }
-
 
 /*
 func (u User) AddUser() (int64,error){
@@ -34,26 +34,27 @@ func (u User) AddUser() (int64,error){
 	//id值代表的是此次数据操作影响的行数,id是一个整数int64类型
 	return id,nil
 }}
- */
+*/
 
-func (u User) AddUser() (int64,error){
-	  md5Hash :=md5.New()
-	  md5Hash.Write([]byte(u.Password))
-	  passwordBytes := md5Hash.Sum(nil)
-	  u.Password = hex.EncodeToString(passwordBytes)
-	 result,err := db_mysql.Db.Exec("insert into user (telephone, password)"+"values(?,?)",u.Telephone,u.Password)
-	if err!=nil {
-		return -1,err
+func (u User) AddUser() (int64, error) {
+	fmt.Println(u.Telephone, u.Password)
+	md5Hash := md5.New()
+	md5Hash.Write([]byte(u.Password))
+	passwordBytes := md5Hash.Sum(nil)
+	u.Password = hex.EncodeToString(passwordBytes)
+	result, err := db_mysql.Db.Exec("insert into user (telephone, password)"+"values(?,?)", u.Telephone, u.Password)
+	if err != nil {
+		return -1, err
 	}
-    rw ,err := result.RowsAffected()
-	if err!=nil {
-		return -1 ,err
+	row, err := result.RowsAffected()
+	if err != nil {
+		return -1, err
 	}
-	return rw,nil
+	return row, nil
 
 }
 
-/*func (u User) QueryUser()  (*User,error){
+/*func (u User) QueryUser() (*User,error){
 
 	hashMd5 := md5.New()
 	hashMd5.Write([]byte(u.Password))
@@ -71,22 +72,19 @@ func (u User) AddUser() (int64,error){
 }
 */
 
-func(u User) QueryData()(*User, error){
-		hashMd5 := md5.New()
-		hashMd5.Write([]byte(u.Password))
-		pwdBytes := hashMd5.Sum(nil)
-		u.Password = hex.EncodeToString(pwdBytes) //把脱敏的密码的md5值重新赋值为密码进行存储
+func (u User) QueryData() (*User, error) {
+	fmt.Println(u.Telephone, u.Password)
+	hashMd5 := md5.New()
+	hashMd5.Write([]byte(u.Password))
+	pwdBytes := hashMd5.Sum(nil)
+	u.Password = hex.EncodeToString(pwdBytes)
 
-		row := db_mysql.Db.QueryRow("select telephone from user where telephone = ? and password = ?",
-			u.Telephone, u.Password)
+	row := db_mysql.Db.QueryRow("select telephone from user where telephone = ? and password = ?",
+		u.Telephone, u.Password)
 
-		err := row.Scan(&u.Telephone)
-		if err != nil {
-			return nil,err
-		}
-		return &u,nil
+	err := row.Scan(&u.Telephone)
+	if err != nil {
+		return nil, err
 	}
-
-
-
-
+	return &u, nil
+}
