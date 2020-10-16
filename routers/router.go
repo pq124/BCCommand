@@ -16,6 +16,9 @@ func init() {
     //文件上传的功能
 	beego.Router("/upload",&controllers.UploadController{})
 
+	beego.Router("/cert",&controllers.UploadController{})
+
+
 
 
 
