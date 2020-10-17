@@ -89,12 +89,12 @@ func (u User) QueryData() (*User, error) {
 	return &u, nil
 }
 
-func (u User)QueryUserByPhone()(*User,error){
-	row :=db_mysql.Db.QueryRow("select id from  user  where telephone = ?",u.Telephone)
-
-	err:=row.Scan(&u.Id)
+func (u User) QueryUserByPhone() (*User, error) {
+	row := db_mysql.Db.QueryRow("select id from user where telephone = ?",u.Telephone)
+	err :=row.Scan(&u.Id)
 	if err != nil {
 		return nil,err
 	}
 	return &u,nil
+
 }

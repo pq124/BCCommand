@@ -14,8 +14,8 @@ type  UploadRecord struct {
 
 
 func (u UploadRecord) SavaRecord()(int64 ,error){
-	result ,err := db_mysql.Db.Exec("insert into upload_record (user_id,file_name,file_size,file_cert,file_title,cert_time)"+"" +
-		"values(?,?,?,?,?,?)",u.Id,u.FileName,u.FileSize,u.FileCert,u.FileTitle,u.CertTime)
+	result ,err := db_mysql.Db.Exec("insert into upload_record(user_id, file_name, file_size, file_cert, file_title, cert_time)"+
+		"values(?,?,?,?,?,?)",u.UserId,u.FileName,u.FileSize,u.FileCert,u.FileTitle,u.CertTime)
 
 	if err!=nil {
 		return -1,err
@@ -28,7 +28,7 @@ func (u UploadRecord) SavaRecord()(int64 ,error){
 }
 
 func QueryRecordsByUserId(userId int) ([]UploadRecord,error) {
-	rs, err := db_mysql.Db.Query("select user_id, file_name, file_size, file_cert, file_title, cert_time from upload_record where user_id = ?", userId)
+	rs, err := db_mysql.Db.Query("select id, user_id, file_name, file_size, file_cert, file_title, cert_time  from upload_record where user_id = ?", userId)
 	if err != nil {
 		return nil, err
 

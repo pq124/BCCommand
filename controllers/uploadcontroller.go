@@ -23,7 +23,6 @@ func (u *UploadController) Post() {
 	//1.解析用户上传的文件解析
 	//用户上传的自定义文件名
 	telephone := u.Ctx.Request.PostFormValue("telephone")
-
 	title := u.Ctx.Request.PostFormValue("upload_title") //获取用户输入的标题
 	fmt.Println(title)
 
@@ -55,7 +54,8 @@ func (u *UploadController) Post() {
 	hashBytes := hash256.Sum(nil)
 	fmt.Println(hex.EncodeToString(hashBytes))
 
-	user1, err := models.User{Telephone: telephone}.QueryUserByPhone()
+	user := models.User{Telephone:telephone}
+	user1,err := user.QueryUserByPhone()
 	if err != nil {
 		fmt.Println(err.Error())
 		u.Ctx.WriteString("抱歉电子数据认证失败,请重试")
@@ -84,13 +84,14 @@ func (u *UploadController) Post() {
 	//先查询用户id
     records,err:=models.QueryRecordsByUserId(user1.Id)
 	if err!=nil {
+		fmt.Println(err.Error())
 		u.Ctx.WriteString("查询用户失败,请重试")
 		return
 	}
 	u.Data["Records"] = records
-	u.TplName = "cert.html"
+	u.TplName ="list_record.html"
 	//
-	u.Ctx.WriteString("恭喜,已经接收到上传文件!")
+	//u.Ctx.WriteString("恭喜,已经接收到上传文件!")
 
 	/*储存数据库操作
 
