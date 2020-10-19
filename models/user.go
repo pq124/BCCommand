@@ -1,9 +1,8 @@
 package models
 
 import (
+	"DataCertPlatform/utils"
 	"DataCertPlatform/db_mysql"
-	"crypto/md5"
-	"encoding/hex"
 	"fmt"
 )
 
@@ -38,10 +37,13 @@ func (u User) AddUser() (int64,error){
 
 func (u User) AddUser() (int64, error) {
 	fmt.Println(u.Telephone, u.Password)
-	md5Hash := md5.New()
-	md5Hash.Write([]byte(u.Password))
-	passwordBytes := md5Hash.Sum(nil)
-	u.Password = hex.EncodeToString(passwordBytes)
+
+	//md5Hash := md5.New()
+	//md5Hash.Write([]byte(u.Password))
+	//passwordBytes := md5Hash.Sum(nil)
+	//u.Password = hex.EncodeToString(passwordBytes)
+
+	u.Password = utils.Md5HashString(u.Password)
 	result, err := db_mysql.Db.Exec("insert into user (telephone, password)"+"values(?,?)", u.Telephone, u.Password)
 	if err != nil {
 		return -1, err
@@ -73,11 +75,7 @@ func (u User) AddUser() (int64, error) {
 */
 
 func (u User) QueryData() (*User, error) {
-	fmt.Println(u.Telephone, u.Password)
-	hashMd5 := md5.New()
-	hashMd5.Write([]byte(u.Password))
-	pwdBytes := hashMd5.Sum(nil)
-	u.Password = hex.EncodeToString(pwdBytes)
+	u.Password = utils.Md5HashString(u.Password)
 
 	row := db_mysql.Db.QueryRow("select telephone from user where telephone = ? and password = ?",
 		u.Telephone, u.Password)

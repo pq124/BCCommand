@@ -2,14 +2,9 @@ package controllers
 
 import (
 	"DataCertPlatform/models"
-	"crypto/md5"
-	"crypto/sha256"
-	"encoding/hex"
+	"DataCertPlatform/utils"
 	"fmt"
 	"github.com/astaxie/beego"
-	"io"
-	"io/ioutil"
-	"os"
 	"time"
 )
 
@@ -34,25 +29,34 @@ func (u *UploadController) Post() {
 	}
 	defer file.Close() //延迟执行 invalid memory or nil pointer derfence 空指针错误
 
-	//使用io包提供的方法保存文件
+	//调用工具保存在本地
 	savaFilePath := "static/upload/" + head.Filename
-	savaFile, err := os.OpenFile(savaFilePath, os.O_CREATE|os.O_RDWR, 777)
-	if err != nil {
-		u.Ctx.WriteString("抱歉,电子数据认证失败,请重试!")
-	}
-
-	_, err = io.Copy(savaFile, file)
-	if err != nil {
-		u.Ctx.WriteString("抱歉,电子数据认证失败,请重新尝试!")
+	_, err = utils.SavaFile(savaFilePath,file)
+	if err!=nil {
+		u.Ctx.WriteString("抱歉,文件数据认证失败")
 		return
 	}
+	//使用io包提供的方法保存文件
+	//savaFile, err := os.OpenFile(savaFilePath, os.O_CREATE|os.O_RDWR, 777)
+	//if err != nil {
+		//u.Ctx.WriteString("抱歉,电子数据认证失败,请重试!")
+	//}
+
+	//_, err = io.Copy(savaFile, file)
+	//if err != nil {
+	//	u.Ctx.WriteString("抱歉,电子数据认证失败,请重新尝试!")
+	//	return
+	//}
 
 	//计算SHA256
-	hash256 := sha256.New()
-	fileBytes, _ := ioutil.ReadAll(file)
-	hash256.Write(fileBytes)
-	hashBytes := hash256.Sum(nil)
-	fmt.Println(hex.EncodeToString(hashBytes))
+	//hash256 := sha256.New()
+	//fileBytes, _ := ioutil.ReadAll(file)
+	//hash256.Write(fileBytes)
+	//hashBytes := hash256.Sum(nil)
+	//fmt.Println(hex.EncodeToString(hashBytes))
+	fileHash,err:=utils.SHA256HashReader(file)
+	fmt.Println(fileHash)
+
 
 	user := models.User{Telephone:telephone}
 	user1,err := user.QueryUserByPhone()
@@ -62,15 +66,20 @@ func (u *UploadController) Post() {
 		return
 	}
 
-	md5Hash := md5.New()
-	fileMd5Bytes, err := ioutil.ReadAll(savaFile)
-	md5Hash.Write(fileMd5Bytes)
-	bytes := md5Hash.Sum(nil)
+	//md5Hash := md5.New()
+	//fileMd5Bytes, err := ioutil.ReadAll(savaFile)
+	//md5Hash.Write(fileMd5Bytes)
+	//bytes := md5Hash.Sum(nil)
+	md5String,err:=utils.MD5HashReader(file)
+	if err!=nil {
+		u.Ctx.WriteString("抱歉电子数据认证失败.")
+		return
+	}
 	record := models.UploadRecord{
 		UserId:    user1.Id,
 		FileName:  head.Filename,
 		FileSize:  head.Size,
-		FileCert:  hex.EncodeToString(bytes),
+		FileCert: md5String,
 		FileTitle: title,
 		CertTime:  time.Now().Unix(),
 	}
