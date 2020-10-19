@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
 	"io"
 	"io/ioutil"
 )
@@ -35,6 +36,7 @@ func SHA256HashReader(reader io.Reader) (string,error) {
 func MD5HashReader(reader io.Reader)(string,error)  {
 	md5Hash:=md5.New()
 	readerbytes,err :=ioutil.ReadAll(reader)
+	fmt.Println("读取到的文件:",readerbytes)
 	if err!=nil {
 		return "",err
 	}

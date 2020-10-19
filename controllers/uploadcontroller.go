@@ -5,6 +5,7 @@ import (
 	"DataCertPlatform/utils"
 	"fmt"
 	"github.com/astaxie/beego"
+	"os"
 	"time"
 )
 
@@ -24,6 +25,7 @@ func (u *UploadController) Post() {
 	//用户上传的文件
 	file, head, err := u.GetFile("pengqiang")
 	if err != nil {
+		fmt.Println(err.Error())
 		u.Ctx.WriteString("数据解析失败,请重试")
 		return
 	}
@@ -59,6 +61,8 @@ func (u *UploadController) Post() {
 
 
 	user := models.User{Telephone:telephone}
+
+
 	user1,err := user.QueryUserByPhone()
 	if err != nil {
 		fmt.Println(err.Error())
@@ -70,11 +74,13 @@ func (u *UploadController) Post() {
 	//fileMd5Bytes, err := ioutil.ReadAll(savaFile)
 	//md5Hash.Write(fileMd5Bytes)
 	//bytes := md5Hash.Sum(nil)
-	md5String,err:=utils.MD5HashReader(file)
+	savaFile,err:=os.Open(savaFilePath)
+	md5String,err:=utils.MD5HashReader(savaFile)
 	if err!=nil {
 		u.Ctx.WriteString("抱歉电子数据认证失败.")
 		return
 	}
+
 	record := models.UploadRecord{
 		UserId:    user1.Id,
 		FileName:  head.Filename,
@@ -203,3 +209,9 @@ func (u *UploadController) Post() {
 
 	*/
 }
+/*
+ *func (u *UploadController) Get()  {
+	u.Data["Telephone"] =u.T
+	u.TplName="home.html"
+}
+ */

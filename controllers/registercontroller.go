@@ -13,8 +13,10 @@ type RegisterController struct {
 func (r *RegisterController)Post()  {
 	//解析用户端提交的请求数据
 	var user models.User
+
 	err := r.ParseForm(&user)
 	if err != nil {
+
 		r.Ctx.WriteString("解析失败")
 		return
 	}
