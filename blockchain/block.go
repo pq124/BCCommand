@@ -16,6 +16,7 @@ type Block struct {
      Data  []byte //数据字段
      Hash  []byte //当前区块的Hash值
      Version string //版本号
+	Nonce  int64//区块对应的nonce值
 }
 
 func NewBlock(height int64,prevhash []byte,data []byte) Block {
@@ -25,6 +26,7 @@ func NewBlock(height int64,prevhash []byte,data []byte) Block {
 		PrevHash:  prevhash,
 		Data:      data,
 		Version:   "0x01",
+
 	}
 	heightBytes,_:=utils.Int64ToByte(block.Height)
 	timeStampBytes,_:=utils.Int64ToByte(block.TimeStamp)
@@ -39,7 +41,10 @@ func NewBlock(height int64,prevhash []byte,data []byte) Block {
 		block.Data,
 		versionBytes,
 	},[]byte{})
+	//计算Hash值
 	 block.Hash = utils.SHA256HashBlock(blockBytes)
+
+	 //挖矿竞争,获得记账权
 	 return block
 }
 //创建创世区块
