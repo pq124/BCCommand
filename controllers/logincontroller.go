@@ -22,7 +22,7 @@ func (l *LoginController)Post() {
 			return
 	}
 	//3、判断数据库查询结果
-	  u,err :=user.QueryData()
+	  u,err :=  user.QueryData()
 	 if err!=nil {
 	 	fmt.Println(err.Error())
 		 l.Ctx.WriteString("登陆失败")
