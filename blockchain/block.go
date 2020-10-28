@@ -62,16 +62,21 @@ func CreateGenesisBlock() Block {
 }
 
 func (b Block)Serialize() ([]byte){
-	buff := new(bytes.Buffer)
-	encoder := gob.NewEncoder(buff)
-	encoder.Encode(b)//将区块B放入到序列化编码器中
-    return buff.Bytes()
+	//buff := new(bytes.Buffer)
+	//encoder := gob.NewEncoder(buff)
+	//encoder.Encode(b)
+    //return buff.Bytes()
+	buff:=new(bytes.Buffer)
+	encoder:=gob.NewEncoder(buff)
+	//将区块B放入到序列化编码器中
+	encoder.Encode(b)
+	return buff.Bytes()
 }
 
 func DeSerialize (data []byte)(*Block,error){
 	var  block Block
 	decode := gob.NewDecoder(bytes.NewReader(data))
-	err:=decode.Decode(block)
+	err:=decode.Decode(&block)
 	if err!=nil {
 		return nil,err
 	}
