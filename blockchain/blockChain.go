@@ -64,6 +64,7 @@ func NewBlockChain() *BlockChain {
 //该放用于遍历区块链chain.db文件，并将所有的区块查出，并返回
 //
 func(bc BlockChain)QueryAllBlocks()([]*Block,error){
+
 	blocks :=make([]*Block,0)
 	db:=bc.BoltDb
 	var err error
@@ -78,7 +79,6 @@ func(bc BlockChain)QueryAllBlocks()([]*Block,error){
 		eachHash :=bc.LastHash
 		eachBig :=new(big.Int)
 		zeroBig :=big.NewInt(0)//默认值零的大整数
-
 		for  {
 			//根据hash值获取对应的区块
 			eachBlockBytes := bucket.Get(eachHash)
@@ -174,9 +174,49 @@ func (bc *BlockChain) AddBlock(data []byte)(Block ,error) {
 		//更新LASTHASH对应的值,更新为最新区块的区块的hash值
 		bucket.Put([]byte(LASTHASH), newBlock.Hash)
 		return nil
-		//将区块链实例的LASTHASH
+		//将区块链实例的LASTHASH更新成最新区块
 		bc.LastHash = newBlock.Hash
 		return nil
 	})
 	return newBlock, err
 }
+//该方法用于更具用户输入的认证号查询到对应的区块信息
+/*func(bc BlockChain) QueryBlockByCertId(cert_id string)*Block{
+	blocks :=make([]*Block,0)
+	db :=bc.BoltDb
+	var  err  error
+	db.View(func(tx *bolt.Tx) error {
+		bucket:=tx.Bucket([]byte(BUCKET_NAME))
+		if bucket == nil {//判断桶是否存在
+			err =errors.New("查询链上数据发生的错误")
+			return  err
+		}
+
+		eachHash :=bc.LastHash
+		eachBig :=new(big.Int)
+        zeroBig :=big.NewInt(0)
+
+		for  {
+           eachBlockBytes :=bucket.Get(eachHash)
+           eachBlock,err:=DeSerialize(eachBlockBytes)
+			if err!=nil {
+				break
+			}
+			// 将遍历到得区块中得数据跟用户提供得认证号比较
+			if string(eachBlock.Data)==cert_id {
+				blocks :=eachBlock
+				break
+			}
+			eachHash = eachBlock.PrevHash
+			if  {
+
+			}
+		}
+		return  nil
+
+	})
+	return block,nil
+}
+ */
+
+

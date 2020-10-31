@@ -4,6 +4,7 @@ import (
 	"DataCertPlatform/blockchain"
 	"DataCertPlatform/db_mysql"
 	_ "DataCertPlatform/routers"
+	"fmt"
 	"github.com/astaxie/beego"
 )
 
@@ -50,7 +51,21 @@ func main() {
 	//fmt.Printf("区块高度:n",block1.)
 	//return
 
-	 blockchain.NewBlockChain()
+	 //blockchain.NewBlockChain()
+bc:=blockchain.NewBlockChain()
+fmt.Printf("最新区块的的哈希值:%x\n",bc.LastHash)
+block1,err := bc.AddBlock([]byte("用户要保存到区块的数据"))
+	if err!=nil {
+		fmt.Println(err.Error())
+		return
+	}
+	fmt.Printf("区块的高度:%d\n",block1.Height)
+	fmt.Printf("区块的Hash:%x\n",block1.Hash)
+	fmt.Printf("区块的PrevHash:%x\n",block1.PrevHash)
+	return
+
+
+
 
 
 	db_mysql.Connect()

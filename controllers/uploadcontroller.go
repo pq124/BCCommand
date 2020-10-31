@@ -98,7 +98,12 @@ func (u *UploadController) Post() {
 	}
 
 	//将用户上传的文件的md5值和sha256值保存到区块链上
-	blockchain.CHAIN.AddBlock([]byte(fileHash))
+	block,err:=blockchain.CHAIN.AddBlock([]byte(md5String))
+	if err!=nil {
+		u.Ctx.WriteString("抱歉数据上链失败"+err.Error())
+		return
+	}
+	fmt.Println("恭喜,已经保存到区块两种，区块的高度是:",block.Height)
 
 
 	//先查询用户id
