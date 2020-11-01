@@ -25,6 +25,7 @@ func (c CertRecord)Serialize()([]byte,error){
 	return buff.Bytes(),err
 }
 
+//该函数用于反序列化生成一个CertRecord结构体实例
 func DeserializaCertRecord(data []byte)(*CertRecord,error){
 	var  certRecord *CertRecord
 	err :=gob.NewDecoder(bytes.NewReader(data)).Decode(&certRecord)

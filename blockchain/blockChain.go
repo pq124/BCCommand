@@ -2,6 +2,7 @@ package blockchain
 
 import (
 	"errors"
+	"fmt"
 	"github.com/bolt"
 	"math/big"
 )
@@ -57,6 +58,7 @@ func NewBlockChain() *BlockChain {
 		}
 		return nil
 	})
+	CHAIN = bc
 	return bc
 
 }
@@ -116,16 +118,20 @@ func (bc BlockChain)QueryBlockByHeight(height int64)(*Block,error){
 		bucket :=tx.Bucket([]byte(BUCKET_NAME))
 		if bucket==nil {
 			//panic("读取区块数据失败!")
-			errs = errors.New("读取区块数据失败!")
+			errs = errors.New("读取区块 数据失败!")
 			return errs
 		}
 		eachHash:=bc.LastHash
+		//eachBig := new(big.Int)
+		//zeroBig := big.NewInt(0)
 		for   {
 			//获取到最后一个区块的hash
-			eachBlockBytrs :=bucket.Get(eachHash)
+			eachBlockHash :=bucket.Get(eachHash)
+			//fmt.Printf("遍历的区块hash:%x\n",eachHash)
 			//反序列化操作
-			eachBlock,err := DeSerialize(eachBlockBytrs)
-			if err!=nil {
+			eachBlock,errs:= DeSerialize(eachBlockHash)
+			//fmt.Println("最后一个区块的数据",eachBlockHash)
+			if errs!=nil {
                return errs
 			}
 			if eachBlock.Height<height {
@@ -153,7 +159,7 @@ func (bc *BlockChain) AddBlock(data []byte)(Block ,error) {
 	db.View(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket([]byte(BUCKET_NAME))
 		if bucket == nil {
-			panic("读取区块链数据失败")
+			//panic("读取区块链数据失败")
 			err = errors.New("读取区块链失败")
 			return err
 		}
@@ -176,14 +182,16 @@ func (bc *BlockChain) AddBlock(data []byte)(Block ,error) {
 		return nil
 		//将区块链实例的LASTHASH更新成最新区块
 		bc.LastHash = newBlock.Hash
+		fmt.Println(newBlock)
 		return nil
 	})
-	return newBlock, err
+	return newBlock,err
 }
+
 //该方法用于更具用户输入的认证号查询到对应的区块信息
-/*func(bc BlockChain) QueryBlockByCertId(cert_id string)*Block{
-	blocks :=make([]*Block,0)
+func(bc BlockChain) QueryBlockByCertId(cert_id string)(*Block,error){
 	db :=bc.BoltDb
+	var block *Block
 	var  err  error
 	db.View(func(tx *bolt.Tx) error {
 		bucket:=tx.Bucket([]byte(BUCKET_NAME))
@@ -204,19 +212,20 @@ func (bc *BlockChain) AddBlock(data []byte)(Block ,error) {
 			}
 			// 将遍历到得区块中得数据跟用户提供得认证号比较
 			if string(eachBlock.Data)==cert_id {
-				blocks :=eachBlock
+				block =eachBlock
+				break
+			}
+			eachBig.SetBytes(eachBlock.PrevHash)
+			if eachBig.Cmp(zeroBig)==0 {//找到创世区块,停止运行
 				break
 			}
 			eachHash = eachBlock.PrevHash
-			if  {
-
 			}
-		}
 		return  nil
 
 	})
 	return block,nil
 }
- */
+
 
 

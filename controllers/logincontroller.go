@@ -23,11 +23,19 @@ func (l *LoginController)Post() {
 	}
 	//3、判断数据库查询结果
 	  u,err :=  user.QueryData()
+	  //判断数据库查查询结果
 	 if err!=nil {
 	 	fmt.Println(err.Error())
 		 l.Ctx.WriteString("登陆失败")
 		 return
 	 }
+	 //3.1增加逻辑:判断用户是否已经实名认证,如果没有实名认证,则跳转到认证页面
+	 if u.Name ==""|| u.Card == "" {
+	 	l.TplName="user_kyc.html"
+		 return
+	}
+
+
 	    l.Data["Telephone"] = u.Telephone//动态数据设置
 	    l.TplName = "home.html"
  }

@@ -17,6 +17,8 @@ func init() {
 	beego.Router("/upload",&controllers.UploadController{})
 
 	beego.Router("/list_record",&controllers.UploadController{})
+
+	beego.Router("/cert_detail.html",&controllers.CertDetailController{})
 	//用户新增存证
     //beego.Router("home.html",&controllers.UploadController{})
     //查看认证数据证书页面()
