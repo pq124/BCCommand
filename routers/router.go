@@ -22,6 +22,7 @@ func init() {
 	//用户新增存证
     //beego.Router("home.html",&controllers.UploadController{})
     //查看认证数据证书页面()
+    beego.Router("user_kyc",&controllers.UserKycController{})
 
 
 

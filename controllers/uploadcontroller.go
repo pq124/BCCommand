@@ -97,8 +97,23 @@ func (u *UploadController) Post() {
 		return
 	}
 
+   user1=&models.User{
+   Telephone:telephone,
+   }
+     user1,_= user.QueryUserByPhone()
+     CertRecord :=models.CertRecord{
+		CertId:   []byte(md5String),
+		CertHash: []byte(fileHash),
+		CertName: user.Name,
+		CertCard: user.Card,
+		Phone:   user.Telephone,
+		FileName: head.Filename,
+		FileSize: head.Size,
+		CertTime: time.Now().Unix(),
+	}
+	 certBytes,_:=CertRecord.Serialize()
 	//将用户上传的文件的md5值和sha256值保存到区块链上
-	block,err:=blockchain.CHAIN.AddBlock([]byte(md5String))
+	block,err:=blockchain.CHAIN.AddBlock([]byte(certBytes))
 	if err!=nil {
 		u.Ctx.WriteString("抱歉数据上链失败"+err.Error())
 		return

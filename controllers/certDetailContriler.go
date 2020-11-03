@@ -2,9 +2,9 @@ package controllers
 
 import (
 	"DataCertPlatform/blockchain"
+	"DataCertPlatform/models"
 	"fmt"
 	"github.com/astaxie/beego"
-	"strings"
 )
 
 type CertDetailController struct {
@@ -25,7 +25,10 @@ func (c *CertDetailController)Get() {
       c.Ctx.WriteString("抱歉，未查到链上数据")
 	}
 	fmt.Println("查询到的区块高度",block.Height)
-	c.Data["certId"]=strings.ToUpper(string(block.Data))
+
+	certRecoed,err:=models.DeserializaCertRecord(block.Data)
+
+	c.Data["CerRecord"]=certRecoed
 	//3.跳转证书详情页面
 	c.TplName = "cert_detail.html"
 }
