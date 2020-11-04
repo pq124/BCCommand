@@ -61,10 +61,8 @@ func (u *UploadController) Post() {
 	fmt.Println(fileHash)
 
 
-	user := models.User{Telephone:telephone}
-
-
-	user1,err := user.QueryUserByPhone()
+	user1,err := models.User{Telephone:telephone}.QueryUserByPhone()
+	//user1,err := user.QueryUserByPhone()
 	if err != nil {
 		fmt.Println(err.Error())
 		u.Ctx.WriteString("抱歉电子数据认证失败,请重试")
@@ -97,16 +95,16 @@ func (u *UploadController) Post() {
 		return
 	}
 
-   user1=&models.User{
+   user:=&models.User{
    Telephone:telephone,
    }
-     user1,_= user.QueryUserByPhone()
+     user,_= user.QueryUserByPhone()
      CertRecord :=models.CertRecord{
 		CertId:   []byte(md5String),
 		CertHash: []byte(fileHash),
 		CertName: user.Name,
 		CertCard: user.Card,
-		Phone:   user.Telephone,
+		Telephone:user.Telephone,
 		FileName: head.Filename,
 		FileSize: head.Size,
 		CertTime: time.Now().Unix(),

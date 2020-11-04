@@ -2,15 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84670b2a-d55c-4030-988f-2d1589e34375" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/controllers/LoginSmsController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/sendSms.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/login_sms.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blockchain.db" beforeDir="false" afterPath="$PROJECT_DIR$/blockchain.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/app.conf" beforeDir="false" afterPath="$PROJECT_DIR$/conf/app.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/certDetailContriler.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/certDetailContriler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/logincontroller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/logincontroller.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/uploadcontroller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/uploadcontroller.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/userKyccontroller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/userKyccontroller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/certRecord.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/certRecord.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/routers/router.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/cert_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/cert_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/user_kyc.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/user_kyc.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Go File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -99,26 +105,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="471" y="215" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1604026391936" />
-    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1604318914849">
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1604415024803">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1604318914849" />
-    <state width="1493" height="168" key="GridCell.Tab.0.bottom" timestamp="1604332268147">
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1604415024803" />
+    <state width="1493" height="167" key="GridCell.Tab.0.bottom" timestamp="1604489376101">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="168" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1604332268147" />
-    <state width="1493" height="168" key="GridCell.Tab.0.center" timestamp="1604332268147">
+    <state width="1493" height="167" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1604489376101" />
+    <state width="1493" height="167" key="GridCell.Tab.0.center" timestamp="1604489376101">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="168" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1604332268147" />
-    <state width="1493" height="168" key="GridCell.Tab.0.left" timestamp="1604332268147">
+    <state width="1493" height="167" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1604489376101" />
+    <state width="1493" height="167" key="GridCell.Tab.0.left" timestamp="1604489376101">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="168" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1604332268147" />
-    <state width="1493" height="168" key="GridCell.Tab.0.right" timestamp="1604332268147">
+    <state width="1493" height="167" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1604489376101" />
+    <state width="1493" height="167" key="GridCell.Tab.0.right" timestamp="1604489376101">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="168" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1604332268147" />
+    <state width="1493" height="167" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1604489376101" />
     <state width="1493" height="188" key="GridCell.Tab.1.bottom" timestamp="1604238362638">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -135,10 +141,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="188" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1604238362638" />
-    <state x="270" y="55" key="SettingsEditor" timestamp="1602592005957">
+    <state x="270" y="55" key="SettingsEditor" timestamp="1604386498066">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="270" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1602592005957" />
+    <state x="270" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1604386498066" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1603364150792">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

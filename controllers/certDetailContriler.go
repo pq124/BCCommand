@@ -26,7 +26,7 @@ func (c *CertDetailController)Get() {
 	}
 	fmt.Println("查询到的区块高度",block.Height)
 
-	certRecoed,err:=models.DeserializaCertRecord(block.Data)
+	certRecoed,err:=models.DeserializeCertRecord(block.Data)
 
 	c.Data["CerRecord"]=certRecoed
 	//3.跳转证书详情页面

@@ -27,7 +27,6 @@ func (l *LoginController)Post() {
 	  //判断数据库查查询结果
 	 if err!=nil {
 	 	fmt.Println(err.Error())
-	 	fmt.Println("U为",u)
 		 l.Ctx.WriteString("登陆失败")
 		 return
 	 }

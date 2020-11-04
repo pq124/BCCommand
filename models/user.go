@@ -10,9 +10,9 @@ type User struct {
 	Id        int    `form:"id"`
 	Telephone string `form:"telephone"`
 	Password  string `form:"password"`
-	Name      string `form:"name"`
-	Card      string `form:"card"`
-	Sex       string `form:"sex"`
+	Name     string `form:"name"` //名字
+	Card     string `form:"card"` //身份证号
+	Sex      string `form:"sex"`  //性别
 }
 
 /*
@@ -38,19 +38,18 @@ func (u User) AddUser() (int64,error){
 }}
 */
 
-func (u User)Updata()(int64,error)  {
-	result,err:=db_mysql.Db.Exec("update user set name =? , card=?, sex=? where telephone=?",u.Name,u.Card,u.Sex,u.Telephone)
-	if err!=nil {
-		return -1,err
+func (u User) UpdateUser() (int64,error) {
+	fmt.Println("电话号码为:",u.Telephone)
+	rs, err := db_mysql.Db.Exec("update user set name = ?, card = ?, sex = ? where telephone = ?",u.Name, u.Card, u.Sex, u.Telephone)
+	if err != nil {
+		return -1, err
 	}
-	id ,err :=result.RowsAffected()
-	if err!=nil {
-		return -1,err
+	id, err := rs.RowsAffected()
+	if err != nil {
+		return -1, err
 	}
-	return id,nil
+	return id, nil
 }
-
-
 
 
 func (u User) AddUser() (int64, error) {
@@ -105,10 +104,11 @@ func (u User) QueryData() (*User, error) {
 
 func (u User) QueryUserByPhone() (*User, error) {
 	row := db_mysql.Db.QueryRow("select id from user where telephone = ?",u.Telephone)
-	err :=row.Scan(&u.Id)
+	var  user User
+	err :=row.Scan(&user.Id)
 	if err != nil {
 		return nil,err
 	}
-	return &u,nil
+	return &user,nil
 
 }
