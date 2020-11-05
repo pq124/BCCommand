@@ -1,8 +1,8 @@
 package models
 
 import (
-	"DataCertPlatform/utils"
 	"DataCertPlatform/db_mysql"
+	"DataCertPlatform/utils"
 	"fmt"
 )
 
@@ -10,9 +10,9 @@ type User struct {
 	Id        int    `form:"id"`
 	Telephone string `form:"telephone"`
 	Password  string `form:"password"`
-	Name     string `form:"name"` //名字
-	Card     string `form:"card"` //身份证号
-	Sex      string `form:"sex"`  //性别
+	Name      string `form:"name"` //名字
+	Card      string `form:"card"` //身份证号
+	Sex       string `form:"sex"`  //性别
 }
 
 /*
@@ -38,9 +38,9 @@ func (u User) AddUser() (int64,error){
 }}
 */
 
-func (u User) UpdateUser() (int64,error) {
-	fmt.Println("电话号码为:",u.Telephone)
-	rs, err := db_mysql.Db.Exec("update user set name = ?, card = ?, sex = ? where telephone = ?",u.Name, u.Card, u.Sex, u.Telephone)
+func (u User) UpdateUser() (int64, error) {
+	fmt.Println("电话号码为:", u.Telephone)
+	rs, err := db_mysql.Db.Exec("update user set name = ?, card = ?, sex = ? where telephone = ?", u.Name, u.Card, u.Sex, u.Telephone)
 	if err != nil {
 		return -1, err
 	}
@@ -50,7 +50,6 @@ func (u User) UpdateUser() (int64,error) {
 	}
 	return id, nil
 }
-
 
 func (u User) AddUser() (int64, error) {
 	fmt.Println(u.Telephone, u.Password)
@@ -93,22 +92,23 @@ func (u User) AddUser() (int64, error) {
 
 func (u User) QueryData() (*User, error) {
 	u.Password = utils.Md5HashString(u.Password)
-	row := db_mysql.Db.QueryRow("select telephone,name,card from user where telephone = ? and password = ?",
+	row := db_mysql.Db.QueryRow("select telephone, name, card from user where telephone = ? and password = ?",
 		u.Telephone, u.Password)
-	err := row.Scan(&u.Telephone,&u.Name,&u.Card)
+	err := row.Scan(&u.Telephone, &u.Name, &u.Card)
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println("数据库读取到的用户数据：", u.Telephone)
 	return &u, nil
 }
 
 func (u User) QueryUserByPhone() (*User, error) {
-	row := db_mysql.Db.QueryRow("select id from user where telephone = ?",u.Telephone)
-	var  user User
-	err :=row.Scan(&user.Id)
+	row := db_mysql.Db.QueryRow("select id from user where telephone = ?", u.Telephone)
+	var user User
+	err := row.Scan(&user.Id)
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
-	return &user,nil
+	return &user, nil
 
 }

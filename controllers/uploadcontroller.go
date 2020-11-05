@@ -60,7 +60,7 @@ func (u *UploadController) Post() {
 	fileHash,err:=utils.SHA256HashReader(file)
 	fmt.Println(fileHash)
 
-
+	fmt.Println(telephone)
 	user1,err := models.User{Telephone:telephone}.QueryUserByPhone()
 	//user1,err := user.QueryUserByPhone()
 	if err != nil {
