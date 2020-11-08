@@ -99,6 +99,7 @@ func (u *UploadController) Post() {
    Telephone:telephone,
    }
      user,_= user.QueryUserByPhone()
+     fmt.Println("用户的信息",user.Name,user.Telephone,user.Card)
      CertRecord :=models.CertRecord{
 		CertId:   []byte(md5String),
 		CertHash: []byte(fileHash),

@@ -1,9 +1,13 @@
 package utils
-/*
+
 import (
 	"encoding/json"
-	"github.com/alibaba-cloud-sdk-go/services/dysmsapi"
+	"fmt"
+	"github.com/aliyun/alibaba-cloud-sdk-go/services/dysmsapi"
 	"github.com/astaxie/beego"
+	"math/rand"
+	"strings"
+	"time"
 )
 
 type  SmsCode struct {
@@ -51,7 +55,14 @@ func SendSms(telephone string,code string,templateType string)(*SmsResult,error)
 	return &SmsResult,nil
 }
 //生成随机数
-func GenrandCode(width int)string {
+func GenRandCode(width int) string {
+	numeric := [10]byte{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+	r := len(numeric)
+	rand.Seed(time.Now().UnixNano())
 
+	var sb strings.Builder
+	for i := 0; i < width; i++ {
+		fmt.Fprintf(&sb, "%d", numeric[ rand.Intn(r) ])
+	}
+	return sb.String()
 }
- */
