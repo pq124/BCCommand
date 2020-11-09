@@ -19,7 +19,11 @@ type SmsResult struct {
 	Code string
 	Message string
 	RequestId string
-} 
+}
+
+const SMS_TLP_REGISTER = "SMS_205393604" //注册业务的短信模板
+const SMS_TLP_LOGIN = "SMS_205398654"    //用户登录的短信模板
+const SMS_TLP_KYC = ""      //实名认证的短信模板
 
 
 
@@ -28,8 +32,8 @@ type SmsResult struct {
 //telephone :电话,接收验证码的号码
 func SendSms(telephone string,code string,templateType string)(*SmsResult,error){
 	config := beego.AppConfig
-	accessKey :=config.String("sms_access_key")
-	accessKeySecrt :=config.String("sms_acess_secret")
+	accessKey :=config.String("accessKey")
+	accessKeySecrt :=config.String("accessKeySecrt")
 	client ,err :=dysmsapi.NewClientWithAccessKey("cn-hangzhou",accessKey,accessKeySecrt)
 	if err!=nil {
 		return nil ,err

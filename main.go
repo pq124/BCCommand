@@ -69,7 +69,7 @@ func main() {
 	//}
 	//fmt.Printf("区块的高度:%d\n",block2.Height)
    // fmt.Print("区块中的数据是:%s\n",string(block2.Data))
-   blockchain.NewBlockChain()
+	blockchain.NewBlockChain()
 	db_mysql.Connect()
 	//静态资源文件设置
 	beego.SetStaticPath("/js", "./static/js")

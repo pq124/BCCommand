@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84670b2a-d55c-4030-988f-2d1589e34375" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/controllers/sendSmsController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/smsLogin.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/smsRecord.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blockchain.db" beforeDir="false" afterPath="$PROJECT_DIR$/blockchain.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blockchain/blockChain.go" beforeDir="false" afterPath="$PROJECT_DIR$/blockchain/blockChain.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/certDetailContriler.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/certDetailContriler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/uploadcontroller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/uploadcontroller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/app.conf" beforeDir="false" afterPath="$PROJECT_DIR$/conf/app.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/sendSms.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/sendSms.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/cert_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/cert_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/login_sms.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/login_sms.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +47,7 @@
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/views" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/css" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -56,16 +57,18 @@
     <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\GoProject\src\DataCertPlatform\static\js" />
-      <recent name="D:\GoProject\src\DataCertPlatform\static\css" />
-      <recent name="D:\GoProject\src\DataCertPlatform\views" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\GoProject\src\DataCertPlatform\static\css" />
       <recent name="D:\GoProject\src\DataCertPlatform\views" />
       <recent name="D:\GoProject\src\DataCertPlatform\static\js" />
       <recent name="D:\GoProject\src\DataCertPlatform\static\img" />
       <recent name="D:\GoProject\src\DataCertPlatform\models" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\GoProject\src\DataCertPlatform\static" />
+      <recent name="D:\GoProject\src\DataCertPlatform\models" />
+      <recent name="D:\GoProject\src\DataCertPlatform\controllers" />
+      <recent name="D:\GoProject\src\DataCertPlatform\static\js" />
       <recent name="D:\GoProject\src\DataCertPlatform\static\css" />
     </key>
   </component>
@@ -93,30 +96,30 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="447" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1604196685124" />
-    <state x="471" y="215" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604026391936">
+    <state x="471" y="215" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604922922026">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="471" y="215" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1604026391936" />
-    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1604842936586">
+    <state x="471" y="215" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1604922922026" />
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1604923928084">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1604842936586" />
-    <state width="1493" height="170" key="GridCell.Tab.0.bottom" timestamp="1604844955281">
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1604923928084" />
+    <state width="1493" height="166" key="GridCell.Tab.0.bottom" timestamp="1604925162030">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="170" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1604844955281" />
-    <state width="1493" height="170" key="GridCell.Tab.0.center" timestamp="1604844955281">
+    <state width="1493" height="166" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1604925162030" />
+    <state width="1493" height="166" key="GridCell.Tab.0.center" timestamp="1604925162030">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="170" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1604844955281" />
-    <state width="1493" height="170" key="GridCell.Tab.0.left" timestamp="1604844955281">
+    <state width="1493" height="166" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1604925162030" />
+    <state width="1493" height="166" key="GridCell.Tab.0.left" timestamp="1604925162030">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="170" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1604844955281" />
-    <state width="1493" height="170" key="GridCell.Tab.0.right" timestamp="1604844955281">
+    <state width="1493" height="166" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1604925162030" />
+    <state width="1493" height="166" key="GridCell.Tab.0.right" timestamp="1604925162030">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="170" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1604844955281" />
+    <state width="1493" height="166" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1604925162030" />
     <state width="1493" height="188" key="GridCell.Tab.1.bottom" timestamp="1604238362638">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
