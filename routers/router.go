@@ -14,6 +14,8 @@ func init() {
 
 	beego.Router("/login_sms.html",&controllers.LoginSmsController{})
 
+	beego.Router("/send_sms",&controllers.SendSmsController{})
+
 	beego.Router("/home.html",&controllers.LoginController{})
     //文件上传的功能
 	beego.Router("/upload",&controllers.UploadController{})

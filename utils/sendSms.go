@@ -31,10 +31,11 @@ const SMS_TLP_KYC = ""      //实名认证的短信模板
 //code
 //telephone :电话,接收验证码的号码
 func SendSms(telephone string,code string,templateType string)(*SmsResult,error){
+
 	config := beego.AppConfig
-	accessKey :=config.String("accessKey")
-	accessKeySecrt :=config.String("accessKeySecrt")
-	client ,err :=dysmsapi.NewClientWithAccessKey("cn-hangzhou",accessKey,accessKeySecrt)
+	AccessKey :=config.String("accessKey")
+	AccessKeySecrt :=config.String("accessKeySecrt")
+	client ,err :=dysmsapi.NewClientWithAccessKey("cn-hangzhou",AccessKey,AccessKeySecrt)
 	if err!=nil {
 		return nil ,err
 	}
@@ -42,7 +43,9 @@ func SendSms(telephone string,code string,templateType string)(*SmsResult,error)
 	request.PhoneNumbers = telephone
 	request.SignName = "线上餐厅"
 	request.TemplateCode = templateType
-	smsCode := SmsCode{Code:code,}
+	smsCode := SmsCode{
+		Code:code,
+	}
 	smsbytes,_:=json.Marshal(smsCode)
 	request.TemplateParam = string(smsbytes)
 
@@ -50,14 +53,17 @@ func SendSms(telephone string,code string,templateType string)(*SmsResult,error)
 	if err!=nil {
 		return nil ,err
 	}
+
 	SmsResult:=SmsResult{
 		BizId:    response.BizId ,
 		Code:      response.Code,
 		Message:   response.Message,
 		RequestId: response.RequestId,
 	}
+	fmt.Println("BIZ得值为:",SmsResult.BizId)
 	return &SmsResult,nil
 }
+
 //生成随机数
 func GenRandCode(width int) string {
 	numeric := [10]byte{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}

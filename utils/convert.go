@@ -13,6 +13,7 @@ func Int64ToByte(num int64)([]byte,error)  {
 	 buff:=new(bytes.Buffer)//通过new实例一个缓存区
 	 //buff.Write()通过一些列的Write方法向缓存区写入数据
 	 //buff.Bytes()通过Bytes方法从缓存区中获取数据
+	 //bytes.NewReader()实例化一个读者
 	 //大端为序排列BigEndian
 	 err:=binary.Write(buff,binary.BigEndian,num)
 	if err!=nil {
