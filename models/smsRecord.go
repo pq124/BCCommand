@@ -19,3 +19,5 @@ func (s SmsRecord) SaveSmsRecord()(int64,error){
 	}
 	return rs.RowsAffected()
 }
+
+

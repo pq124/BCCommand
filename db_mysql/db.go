@@ -36,6 +36,7 @@ func Connect(){
 
 	if err != nil {// err不为nil，表示连接数据库时出现了错误, 程序就在此中断就可以，不用再执行了。
 		//早解决
+		fmt.Println(err.Error())
 		panic("数据库连接错误，请检查配置")
 	}
 	Db = db
