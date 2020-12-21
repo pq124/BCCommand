@@ -24,7 +24,6 @@ func (r *RegisterController)Post()  {
 		r.Ctx.WriteString("抱歉用户注册失败")
 		return
 	}
-
 	  r.TplName="login.html"
 
 }
